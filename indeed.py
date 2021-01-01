@@ -35,7 +35,8 @@ def extract_job(html):
         company = str(company.string)
     company = company.strip()
     location = html.find("span", {"class": "location"}).string
-    return {'title': title, 'company': company, 'location': location}
+    job_id = html["data-jk"]
+    return {'title': title, 'company': company, 'location': location,"link":f"https://kr.indeed.com/채용보기?jk={job_id}"}
 
 
 def extract_indeed_jobs(last_page):
