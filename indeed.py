@@ -33,7 +33,7 @@ def extract_job(html):
 
     else:
         company = str(company.string)
-        company = company.strip()
+    company = company.strip()
     location = html.find("span", {"class": "location"}).string
     return {'title': title, 'company': company, 'location': location}
 
