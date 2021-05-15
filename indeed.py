@@ -1,8 +1,8 @@
 import requests
 from bs4 import BeautifulSoup
-
+JOB = 'python'
 LIMIT = 50
-URL = f'https://kr.indeed.com/%EC%B7%A8%EC%97%85?q=python&limit={LIMIT}'
+URL = f'https://kr.indeed.com/%EC%B7%A8%EC%97%85?q={JOB}&limit={LIMIT}'
 
 
 def get_last_page():
@@ -27,9 +27,12 @@ def get_last_page():
 def extract_job(html):
     title = html.find("h2", {"class": "title"}).find("a")["title"]
     company = html.find("span", {"class": "company"})
-    company_anchor = company.find("a")
+    if company != None:
+      company_anchor = company.find("a")
+    else:
+      company_anchor = "없음"
     if company_anchor is not None:
-        company = str(company_anchor.string)
+        company = str(company_anchor)
 
     else:
         company = str(company.string)
